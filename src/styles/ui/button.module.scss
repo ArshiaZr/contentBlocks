@@ -1,0 +1,22 @@
+.button {
+  padding: 6px 20px;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  border: 1.5px solid black;
+  box-shadow: 2px 2px 0px 0px var(--sidebarText);
+  font-weight: 500;
+
+  transition: all 0.2s;
+
+  &:hover {
+    border: 1.5px solid var(--sidebarText);
+    box-shadow: 2px 2px 0px 0px #ffcd60;
+    color: #fff;
+  }
+}
+
+.primary {
+  background-color: var(--brandColor);
+}
