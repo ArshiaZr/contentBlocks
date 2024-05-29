@@ -1,13 +1,40 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Regular font */
+@font-face {
+  font-family: "Cera";
+  src: url("../public/fonts/Cera-Pro-Regular-Demo.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* medium font */
+@font-face {
+  font-family: "Cera";
+  src: url("../public/fonts/Cera-Pro-Medium-Demo.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+}
+
+/* Bold font */
+@font-face {
+  font-family: "Cera";
+  src: url("../public/fonts/Cera-Pro-Bold-Demo.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+}
+
+/* Black font */
+@font-face {
+  font-family: "Cera";
+  src: url("../public/fonts/Cera-Pro-Black-Demo.woff") format("woff");
+  font-weight: 800;
+  font-style: normal;
+}
+
+/* Apply the custom font */
+body {
+  font-family: "Cera", sans-serif;
 }
