@@ -1,8 +1,13 @@
 import { Link } from "react-router-dom";
 import buttonStyles from "../styles/ui/button.module.scss";
-import textInputStyles from "../styles/ui/textInput.module.scss";
+
+import Input from "../components/Input";
 
 export default function Login() {
+  const onInputChange = (e) => {
+    console.log(e.target.value);
+  };
+
   const handleLogin = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -20,7 +25,7 @@ export default function Login() {
           backgroundSize: "cover",
         }}
       >
-        <div className="max-w-lg mx-auto p-8 mt-[120px] text-center">
+        <div className="max-w-lg mx-auto p-8 text-center">
           <div
             style={{ textShadow: "3px 3px 0px rgba(0, 0, 0, 0.1)" }}
             className="font-bold text-4xl text-white"
@@ -31,24 +36,22 @@ export default function Login() {
         <div className="max-w-lg mx-auto bg-white border-[2px] border-black p-8 rounded-md">
           <div className="">
             <form onSubmit={handleLogin}>
-              <div className="mb-3 mt-1 flex flex-col gap-1">
-                <h3 className="text-lg font-bold">Email Address:</h3>
-                <input
-                  type="email"
-                  placeholder="Email..."
-                  className={`w-full ${textInputStyles.input} ${textInputStyles.primary}`}
-                  name="email"
-                />
-              </div>
-              <div className="mb-3 mt-1 flex flex-col gap-1">
-                <h3 className="text-lg font-bold">Password:</h3>
-                <input
-                  type="password"
-                  placeholder="********"
-                  className={`w-full ${textInputStyles.input} ${textInputStyles.primary}`}
-                  name="password"
-                />
-              </div>
+              <Input
+                title="Email Address:"
+                type="email"
+                name="email"
+                placeholder="Email..."
+                error=""
+                onChange={onInputChange}
+              />
+              <Input
+                title="Password:"
+                type="password"
+                name="password"
+                placeholder="********"
+                error=""
+                onChange={onInputChange}
+              />
               <div>
                 <button
                   type="submit"
@@ -80,9 +83,6 @@ export default function Login() {
                     Your first workspace is free!
                   </div>
                 </div>
-              </div>
-              <div className="text-md font-medium text-purple-600 mt-3">
-                ** We need your email!
               </div>
             </form>
           </div>
