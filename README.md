@@ -6,7 +6,7 @@ Alternative authentication with Clerk for ContentBlocks (also keeping Magic Link
 
 ## Demo
 
-Below is a demonstration of MyCMS in action:
+Below is a demonstration in action:
 
 ![Auth Demo](demo.gif)
 
