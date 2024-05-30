@@ -1,19 +1,111 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAtom } from "jotai";
+import { useSignUp } from "@clerk/clerk-react";
 
 import buttonStyles from "../styles/ui/button.module.scss";
 
 import Input from "../components/Input";
 
-export default function Register() {
+import {
+  emailAtom,
+  passwordAtom,
+  errorMessageAtom,
+  confirmPasswordAtom,
+  usernameAtom,
+} from "../utils/atoms";
+import { validatePassword, validateEmail } from "../utils/validations";
+
+export default function SignUp() {
+  const [username, setUsername] = useAtom(usernameAtom);
+  const [email, setEmail] = useAtom(emailAtom);
+  const [password, setPassword] = useAtom(passwordAtom);
+  const [confirmPassword, setConfirmPassword] = useAtom(confirmPasswordAtom);
+  const [errorMessage, setErrorMessage] = useAtom(errorMessageAtom);
+
+  const navigate = useNavigate();
+
+  const { signUp } = useSignUp();
+
   const onInputChange = (e) => {
-    console.log(e.target.value);
+    const { name, value } = e.target;
+    switch (name) {
+      case "username":
+        setUsername(value);
+        break;
+      case "email":
+        setEmail(value);
+        break;
+      case "password":
+        setPassword(value);
+        break;
+      case "confirmPassword":
+        setConfirmPassword(value);
+        break;
+      default:
+        break;
+    }
   };
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
+    setErrorMessage({});
+
+    // initialize temporary errors object
+    let errors = {};
+
+    // validate form fields
+    if (!username) {
+      errors.username = "Please fill in username field";
+    }
+    if (!email) {
+      errors.email = "Please fill in email field";
+    }
+    let emailValidation = validateEmail(email);
+    if (!emailValidation) {
+      errors.email = "Invalid email";
+    }
+    if (!password) {
+      errors.password = "Please fill in password field";
+    }
+    if (!confirmPassword) {
+      errors.confirmPassword = "Please fill in confirm password field";
+    }
+    let passwordValidation = validatePassword(password);
+    if (passwordValidation !== null) {
+      errors.password = passwordValidation;
+    }
+    if (password !== confirmPassword) {
+      errors.confirmPassword = "Passwords do not match";
+    }
+
+    // set the errors object to the errorMessage atom
+    setErrorMessage(errors);
+    if (Object.keys(errors).length > 0) return;
+
+    // create a new user account
+    try {
+      await signUp.create({
+        emailAddress: email,
+        password,
+        username,
+      });
+
+      // clear form fields
+      setUsername("");
+      setEmail("");
+      setPassword("");
+      setConfirmPassword("");
+      setErrorMessage({});
+
+      // redirect user to login page
+      navigate("/login");
+    } catch (error) {
+      setErrorMessage({ general: error?.errors[0]?.message });
+    }
   };
+
   return (
-    <div
+    <main
       className="p-12 bg-purple-600 min-h-screen flex justify-center items-center flex-col"
       style={{
         backgroundImage:
@@ -42,14 +134,22 @@ export default function Register() {
         </div>
       </div>
       <div className="max-w-lg mx-auto bg-white border-[2px] border-black p-8 rounded-md">
-        <div className="">
+        <div>
+          {errorMessage.general?.length > 0 ? (
+            <div className="text-md font-medium text-purple-600 mb-2 italic">
+              *{errorMessage.general?.length > 0 ? errorMessage.general : ""}
+            </div>
+          ) : (
+            ""
+          )}
+
           <form onSubmit={handleRegister}>
             <Input
               title="Username:"
               type="text"
               placeholder="Username..."
               name="username"
-              error=""
+              error={errorMessage.username}
               onChange={onInputChange}
             />
             <Input
@@ -57,7 +157,7 @@ export default function Register() {
               type="email"
               placeholder="Email..."
               name="email"
-              error=""
+              error={errorMessage.email}
               onChange={onInputChange}
             />
             <Input
@@ -65,7 +165,7 @@ export default function Register() {
               type="password"
               placeholder="********"
               name="password"
-              error=""
+              error={errorMessage.password}
               onChange={onInputChange}
             />
             <Input
@@ -73,7 +173,7 @@ export default function Register() {
               type="password"
               placeholder="********"
               name="confirmPassword"
-              error=""
+              error={errorMessage.confirmPassword}
               onChange={onInputChange}
             />
             <div>
@@ -121,6 +221,6 @@ export default function Register() {
           © 2024 ContentBlocks. All rights reserved.
         </div>
       </div>
-    </div>
+    </main>
   );
 }

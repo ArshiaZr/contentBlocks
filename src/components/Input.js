@@ -11,8 +11,11 @@ export default function Input({
   return (
     <div className="mb-3 mt-1">
       <div className="flex flex-col gap-1">
-        <h3 className="text-lg font-bold">{title}</h3>
+        <label htmlFor={name} className="text-lg font-bold">
+          {title}
+        </label>
         <input
+          id={name}
           type={type}
           placeholder={placeholder}
           className={`w-full ${textInputStyles.input} ${textInputStyles.primary}`}
