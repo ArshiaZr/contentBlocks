@@ -1,3 +1,5 @@
+// Desc: This file contains all the atoms that are used in the application
+
 import { atom } from "jotai";
 import { atomWithStorage } from "jotai/utils";
 
