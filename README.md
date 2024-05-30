@@ -1,6 +1,35 @@
-# Getting Started with Create React App
+# ContentBlocks Take Home Assignment
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Description
+
+Alternative authentication with Clerk for ContentBlocks (also keeping Magic Link Method).
+
+## Approach Taken
+
+1. **Clerk Integration**:
+
+   - Integrated Clerk for authentication to provide a seamless and secure login experience.
+   - Utilized Clerk's sign-up, sign-in, and sign-out functionalities to manage user authentication.
+   - Maintained existing Magic Link authentication for users who prefer that method, ensuring a flexible authentication system.
+
+2. **State Management**:
+
+   - Used Jotai for state management to handle form inputs and error messages.
+   - Centralized state management improved the readability and maintainability of the code.
+
+3. **Form Handling and Validation**:
+
+   - Implemented input change handlers and validation functions to manage form states and validate user inputs.
+   - Provided user-friendly error messages to guide users in correcting input errors.
+
+4. **Navigation and User Feedback**:
+
+   - Utilized `react-router-dom` for navigation, redirecting users upon successful login or sign-up.
+   - Added user feedback through error messages and page titles to enhance the user experience.
+
+5. **UI and Styling**:
+   - Applied consistent styling using CSS modules to ensure a cohesive look and feel.
+   - Used responsive design principles to ensure the application is accessible on various devices.
 
 ## Available Scripts
 
@@ -39,32 +68,21 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+## Password Hashing Demonstration
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+To demonstrate password hashing, you can use a library like bcrypt.js. Here's an example of how you can hash a password using bcrypt.js:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```javascript
+const bcrypt = require("bcryptjs");
 
-### Code Splitting
+const password = "myPassword123";
+const saltRounds = 10;
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+bcrypt.hash(password, saltRounds, (err, hash) => {
+  if (err) {
+    console.error(err);
+    return;
+  }
+  console.log("Hashed password:", hash);
+});
+```
