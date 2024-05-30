@@ -6,7 +6,8 @@ import SignUp from "./pages/signup";
 import ProtectedRoute from "./components/ProtectedRoute";
 import ForgotPassword from "./pages/forgot-password";
 import NotFound from "./pages/not-found";
-
+import DeprecatedLogin from "./pages/deprecated-login";
+import DeprecatedSignUp from "./pages/deprecated-signup";
 function App() {
   return (
     <Routes>
@@ -20,6 +21,26 @@ function App() {
         path="/login"
         element={
           <ProtectedRoute element={<Login />} redirectPath="/" reverse={true} />
+        }
+      />
+      <Route
+        path="/deprecated-login"
+        element={
+          <ProtectedRoute
+            element={<DeprecatedLogin />}
+            redirectPath="/"
+            reverse={true}
+          />
+        }
+      />
+      <Route
+        path="/deprecated-signup"
+        element={
+          <ProtectedRoute
+            element={<DeprecatedSignUp />}
+            redirectPath="/"
+            reverse={true}
+          />
         }
       />
       <Route

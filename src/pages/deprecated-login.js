@@ -1,26 +1,19 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useAtom } from "jotai";
 import buttonStyles from "../styles/ui/button.module.scss";
-import { useSignIn, useClerk } from "@clerk/clerk-react";
 
 import Input from "../components/Input";
 
-import { usernameAtom, passwordAtom, errorMessageAtom } from "../utils/atoms";
+import { emailAtom, errorMessageAtom } from "../utils/atoms";
+import { validateEmail } from "../utils/validations";
 
-export default function Login() {
-  const [username, setUsername] = useAtom(usernameAtom);
-  const [password, setPassword] = useAtom(passwordAtom);
+export default function DeprecatedLogin() {
+  const [email, setEmail] = useAtom(emailAtom);
   const [errorMessage, setErrorMessage] = useAtom(errorMessageAtom);
-
-  const navigate = useNavigate();
-
-  const { signIn } = useSignIn();
-  const { setActive } = useClerk();
 
   const onInputChange = ({ target: { name, value } }) => {
     const setters = {
-      username: setUsername,
-      password: setPassword,
+      email: setEmail,
     };
     setters[name](value);
   };
@@ -29,8 +22,8 @@ export default function Login() {
     // initialize temporary errors object
     let errors = {};
     e.preventDefault();
-    if (!username) errors.username = "Please fill in username field";
-    if (!password) errors.password = "Please fill in password field";
+    if (!email) errors.email = "Please fill in email field";
+    if (!validateEmail(email)) errors.email = "Invalid email";
 
     // set errors to error message atom
     setErrorMessage(errors);
@@ -38,26 +31,7 @@ export default function Login() {
       return;
     }
 
-    // try to sign in
-    try {
-      const signInResponse = await signIn.create({
-        identifier: username,
-        password,
-      });
-
-      // if sign in is successful set session and redirect to dashboard if not show error message
-      if (signInResponse.status === "complete") {
-        await setActive({ session: signInResponse.createdSessionId });
-        setUsername("");
-        setPassword("");
-        setErrorMessage({});
-        navigate("/");
-      } else {
-        setErrorMessage({ general: "Invalid username or password" });
-      }
-    } catch (error) {
-      setErrorMessage({ general: "Invalid username or password" });
-    }
+    // magic link sign in logic
   };
 
   return (
@@ -77,19 +51,11 @@ export default function Login() {
 
           <form onSubmit={handleLogin}>
             <Input
-              title="Username:"
-              type="text"
-              name="username"
-              placeholder="Username..."
-              error={errorMessage.username}
-              onChange={onInputChange}
-            />
-            <Input
-              title="Password:"
-              type="password"
-              name="password"
-              placeholder="********"
-              error={errorMessage.password}
+              title="Email Address:"
+              type="email"
+              name="email"
+              placeholder="Email..."
+              error={errorMessage.email}
               onChange={onInputChange}
             />
             <div>
@@ -99,22 +65,6 @@ export default function Login() {
               >
                 Login
               </button>
-              <div className="text-md px-12 text-center mt-4 font-medium">
-                <Link
-                  to="/forgot-password"
-                  className="font-bold text-indigo-500 hover:underline"
-                >
-                  Forgot your password?
-                </Link>
-              </div>
-              <div className="px-12 text-center mt-1 font-medium text-sm">
-                <Link
-                  to="/deprecated-login"
-                  className="font-bold hover:underline text-slate-400"
-                >
-                  Use magic link to login
-                </Link>
-              </div>
               <div
                 className="flex items-center justify-center border-t-2 border-gray-500 mt-12"
                 style={{ borderColor: "#DEE7ED" }}
@@ -127,7 +77,7 @@ export default function Login() {
                 <div className="text-xl text-center font-bold mb-4">
                   Get Started with ContentBlocks
                 </div>
-                <Link to="/signup">
+                <Link to="/deprecated-signup">
                   <button
                     type="button"
                     className={`w-full ${buttonStyles.button} ${buttonStyles.primary}`}
