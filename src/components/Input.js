@@ -24,8 +24,12 @@ export default function Input({
           onChange={onChange}
         />
       </div>
-      <span style={{ display: error.length > 0 ? "inline-block" : "none" }}>
-        {error}
+      <span
+        className={`${
+          error.length > 0 ? "inline-block" : "hidden"
+        } text-sm italic text-indigo-500`}
+      >
+        *{error}
       </span>
     </div>
   );
