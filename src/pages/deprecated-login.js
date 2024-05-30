@@ -13,6 +13,13 @@ export default function DeprecatedLogin() {
   const [email, setEmail] = useAtom(emailAtom);
   const [errorMessage, setErrorMessage] = useAtom(errorMessageAtom);
 
+  // Update page title
+  useEffect(() => {
+    document.title = "ContentBlocks | Login";
+    setEmail("");
+    setErrorMessage({});
+  }, []);
+
   // handle input change
   const onInputChange = ({ target: { name, value } }) => {
     const setters = {
@@ -37,11 +44,6 @@ export default function DeprecatedLogin() {
 
     // magic link sign in logic
   };
-
-  // Update page title
-  useEffect(() => {
-    document.title = "ContentBlocks | Login";
-  }, []);
 
   return (
     <main className="p-12 bg-purple-600 min-h-screen flex justify-center items-center flex-col background">

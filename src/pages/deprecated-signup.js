@@ -44,6 +44,8 @@ export default function DeprecatedSignup() {
   // Update page title
   useEffect(() => {
     document.title = "ContentBlocks | Sign Up";
+    setEmail("");
+    setErrorMessage({});
   }, []);
 
   return (

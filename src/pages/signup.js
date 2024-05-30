@@ -37,6 +37,12 @@ export default function SignUp() {
   // Update page title
   useEffect(() => {
     document.title = "ContentBlocks | Sign Up";
+    setUsername("");
+    setEmail("");
+    setPassword("");
+    setConfirmPassword("");
+    setErrorMessage({});
+    setLoading(false);
   }, []);
 
   // handle input change

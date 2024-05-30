@@ -31,6 +31,10 @@ export default function Login() {
   // Update page title
   useEffect(() => {
     document.title = "ContentBlocks | Login";
+    setUsername("");
+    setPassword("");
+    setErrorMessage({});
+    setLoading(false);
   }, []);
 
   // handle input change
