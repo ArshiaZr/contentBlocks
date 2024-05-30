@@ -4,6 +4,12 @@
 
 Alternative authentication with Clerk for ContentBlocks (also keeping Magic Link Method).
 
+## Demo
+
+Below is a demonstration of MyCMS in action:
+
+![Auth Demo](demo.gif)
+
 ## Approach Taken
 
 1. **Clerk Integration**:
