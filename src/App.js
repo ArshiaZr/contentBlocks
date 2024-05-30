@@ -1,8 +1,11 @@
 import { Routes, Route } from "react-router-dom";
+
 import Dashboard from "./pages/dashboard";
 import Login from "./pages/login";
 import SignUp from "./pages/signup";
 import ProtectedRoute from "./components/ProtectedRoute";
+import ForgotPassword from "./pages/forgot-password";
+import NotFound from "./pages/not-found";
 
 function App() {
   return (
@@ -29,8 +32,8 @@ function App() {
           />
         }
       />
-      {/* <Route path="/forgot-password" element={<ForgotPassword />} />
-      <Route path="*" element={<NotFound />} /> */}
+      <Route path="/forgot-password" element={<ForgotPassword />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }

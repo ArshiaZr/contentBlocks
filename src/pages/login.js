@@ -17,30 +17,20 @@ export default function Login() {
   const { signIn } = useSignIn();
   const { setActive } = useClerk();
 
-  const onInputChange = (e) => {
-    const { name, value } = e.target;
-    switch (name) {
-      case "username":
-        setUsername(value);
-        break;
-      case "password":
-        setPassword(value);
-        break;
-      default:
-        break;
-    }
+  const onInputChange = ({ target: { name, value } }) => {
+    const setters = {
+      username: setUsername,
+      password: setPassword,
+    };
+    setters[name](value);
   };
 
   const handleLogin = async (e) => {
     // initialize temporary errors object
     let errors = {};
     e.preventDefault();
-    if (!username) {
-      errors.username = "Please fill in email field";
-    }
-    if (!password) {
-      errors.password = "Please fill in password field";
-    }
+    if (!username) errors.username = "Please fill in email field";
+    if (!password) errors.password = "Please fill in password field";
 
     // set errors to error message atom
     setErrorMessage(errors);
@@ -66,29 +56,16 @@ export default function Login() {
         setErrorMessage({ general: "Invalid username or password" });
       }
     } catch (error) {
-      console.log(error);
       setErrorMessage({ general: "Invalid username or password" });
     }
   };
 
   return (
-    <main
-      className="p-12 bg-purple-600 min-h-screen"
-      style={{
-        backgroundImage:
-          'url("https://upcdn.io/kW15bg4/image/uploads/2024/01/07/4kuTEvpN7d-Untitled design (7).png")',
-        backgroundSize: "cover",
-      }}
-    >
-      <div className="max-w-lg mx-auto p-8 text-center">
-        <div
-          style={{ textShadow: "3px 3px 0px rgba(0, 0, 0, 0.1)" }}
-          className="font-bold text-4xl text-white"
-        >
-          Welcome Back!
-        </div>
+    <main className="p-12 bg-purple-600 min-h-screen flex justify-center items-center flex-col background">
+      <div className="max-w-lg mx-auto p-8 text-center title-class">
+        <div className="font-bold text-4xl text-white">Welcome Back!</div>
       </div>
-      <div className="max-w-lg mx-auto bg-white border-[2px] border-black p-8 rounded-md">
+      <div className="form-wrapper-width mx-auto bg-white border-[2px] border-black p-8 rounded-md">
         <div>
           {errorMessage.general?.length > 0 ? (
             <div className="text-md font-medium text-purple-600 mb-2 italic">
@@ -122,6 +99,14 @@ export default function Login() {
               >
                 Login
               </button>
+              <div className="text-md px-12 text-center mt-4 font-medium">
+                <Link
+                  to="/forgot-password"
+                  className="font-bold text-indigo-500 hover:underline"
+                >
+                  Forgot your password?
+                </Link>
+              </div>
               <div
                 className="flex items-center justify-center border-t-2 border-gray-500 mt-12"
                 style={{ borderColor: "#DEE7ED" }}
@@ -151,10 +136,7 @@ export default function Login() {
         </div>
       </div>
       <div className="max-w-lg mx-auto p-8 mt-2 text-center">
-        <div
-          style={{ textShadow: "3px 3px 0px rgba(0, 0, 0, 0.1)" }}
-          className="font-bold text-sm text-white"
-        >
+        <div className="font-bold text-sm text-white text-shadow">
           © 2024 ContentBlocks. All rights reserved.
         </div>
       </div>

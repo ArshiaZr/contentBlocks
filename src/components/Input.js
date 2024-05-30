@@ -1,3 +1,4 @@
+// Desc: Input component for forms with error handling
 import textInputStyles from "../styles/ui/textInput.module.scss";
 
 export default function Input({

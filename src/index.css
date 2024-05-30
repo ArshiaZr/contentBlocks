@@ -45,9 +45,38 @@ body {
   font-family: "Cera", sans-serif;
 }
 
+/* Custom styles */
+
 *::selection {
   --tw-bg-opacity: 1;
   background-color: rgb(243 232 255 / var(--tw-bg-opacity));
   --tw-text-opacity: 1;
   color: rgb(168 85 247 / var(--tw-text-opacity));
+}
+
+.background {
+  background-image: url("https://upcdn.io/kW15bg4/image/uploads/2024/01/07/4kuTEvpN7d-Untitled design (7).png");
+  background-size: cover;
+  padding: 12px;
+  background-color: #6b46c1;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.title-class {
+  text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
+  font-weight: bold;
+  font-size: 2.25rem;
+  color: white;
+}
+
+.text-shadow {
+  text-shadow: rgba(0, 0, 0, 0.1) 3px 3px 0px;
+}
+
+.form-wrapper-width {
+  width: min(500px, calc(100vw - 48px));
 }
