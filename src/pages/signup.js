@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAtom } from "jotai";
-import { useSignUp } from "@clerk/clerk-react";
+import { useSignUp, useClerk } from "@clerk/clerk-react";
 
 import buttonStyles from "../styles/ui/button.module.scss";
 
@@ -29,6 +29,8 @@ export default function SignUp() {
 
   // Clerk's signUp hook
   const { signUp } = useSignUp();
+  // Clerk's setActive hook
+  const { setActive } = useClerk();
 
   // Update page title
   useEffect(() => {
@@ -72,21 +74,27 @@ export default function SignUp() {
 
     // create a new user account
     try {
-      await signUp.create({
+      const signUpResponse = await signUp.create({
         emailAddress: email,
         password,
         username,
       });
 
-      // clear form fields
-      setUsername("");
-      setEmail("");
-      setPassword("");
-      setConfirmPassword("");
-      setErrorMessage({});
+      if (signUpResponse.status === "complete") {
+        // set session
+        await setActive({ session: signUpResponse.createdSessionId });
+        // clear form fields
+        setUsername("");
+        setEmail("");
+        setPassword("");
+        setConfirmPassword("");
+        setErrorMessage({});
 
-      // redirect user to login page
-      navigate("/login");
+        // redirect user to login page
+        navigate("/");
+      } else {
+        setErrorMessage({ general: "Invalid username or password" });
+      }
     } catch (error) {
       setErrorMessage({ general: error?.errors[0]?.message });
     }
