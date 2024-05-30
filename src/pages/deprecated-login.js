@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAtom } from "jotai";
 import buttonStyles from "../styles/ui/button.module.scss";
@@ -37,6 +38,11 @@ export default function DeprecatedLogin() {
     // magic link sign in logic
   };
 
+  // Update page title
+  useEffect(() => {
+    document.title = "ContentBlocks | Login";
+  }, []);
+
   return (
     <main className="p-12 bg-purple-600 min-h-screen flex justify-center items-center flex-col background">
       <div className="max-w-lg mx-auto p-8 text-center title-class">
@@ -68,6 +74,14 @@ export default function DeprecatedLogin() {
               >
                 Login
               </button>
+              <div className="px-12 text-center mt-4 font-medium text-sm">
+                <Link
+                  to="/login"
+                  className="font-bold hover:underline text-slate-400"
+                >
+                  Use new login
+                </Link>
+              </div>
               <div
                 className="flex items-center justify-center border-t-2 border-gray-500 mt-12"
                 style={{ borderColor: "#DEE7ED" }}

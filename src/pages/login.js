@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAtom } from "jotai";
 import buttonStyles from "../styles/ui/button.module.scss";
@@ -20,6 +21,11 @@ export default function Login() {
   const { signIn } = useSignIn();
   // Clerk's setActive hook
   const { setActive } = useClerk();
+
+  // Update page title
+  useEffect(() => {
+    document.title = "ContentBlocks | Login";
+  }, []);
 
   // handle input change
   const onInputChange = ({ target: { name, value } }) => {

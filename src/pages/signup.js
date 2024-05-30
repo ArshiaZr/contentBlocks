@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAtom } from "jotai";
 import { useSignUp } from "@clerk/clerk-react";
@@ -28,6 +29,11 @@ export default function SignUp() {
 
   // Clerk's signUp hook
   const { signUp } = useSignUp();
+
+  // Update page title
+  useEffect(() => {
+    document.title = "ContentBlocks | Sign Up";
+  }, []);
 
   // handle input change
   const onInputChange = ({ target: { name, value } }) => {

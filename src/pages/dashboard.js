@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useClerk } from "@clerk/clerk-react";
 
 export default function Dashboard() {
@@ -9,6 +9,11 @@ export default function Dashboard() {
   const handleLogout = async () => {
     await signOut();
   };
+
+  // Update page title
+  useEffect(() => {
+    document.title = "ContentBlocks | Dashboard";
+  }, []);
 
   return (
     <main className="background">

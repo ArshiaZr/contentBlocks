@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAtom } from "jotai";
 
@@ -39,6 +40,11 @@ export default function DeprecatedSignup() {
 
     // create a new user account with the magic link method
   };
+
+  // Update page title
+  useEffect(() => {
+    document.title = "ContentBlocks | Sign Up";
+  }, []);
 
   return (
     <main className="p-12 bg-purple-600 min-h-screen flex justify-center items-center flex-col background">

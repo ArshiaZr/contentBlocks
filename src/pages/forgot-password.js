@@ -1,5 +1,5 @@
 // All of the commented lines are for the next steps since the recovering password was not part of the assignment.
-
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 // import { useAtom } from "jotai";
 import buttonStyles from "../styles/ui/button.module.scss";
@@ -21,6 +21,11 @@ export default function ForgotPassword() {
     //     break;
     // }
   };
+
+  // Update page title
+  useEffect(() => {
+    document.title = "ContentBlocks | Forgot Password";
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

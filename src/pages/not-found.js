@@ -1,6 +1,12 @@
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 export default function NotFound() {
+  // Update page title
+  useEffect(() => {
+    document.title = "ContentBlocks | Not Found";
+  }, []);
+
   return (
     <main className="background">
       <div className="max-w-lg mx-auto p-8 text-center ">
