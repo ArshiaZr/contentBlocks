@@ -10,3 +10,4 @@ export const errorMessageAtom = atom({});
 export const confirmPasswordAtom = atom("");
 export const isAuthenticatedAtom = atomWithStorage("isAuth", false);
 export const userAtom = atomWithStorage("user", {});
+export const loadingAtom = atom(false);

@@ -1,18 +1,24 @@
 import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAtom } from "jotai";
-import buttonStyles from "../styles/ui/button.module.scss";
 import { useSignIn, useClerk } from "@clerk/clerk-react";
+import Button from "../components/Button";
 
 import Input from "../components/Input";
 
-import { usernameAtom, passwordAtom, errorMessageAtom } from "../utils/atoms";
+import {
+  usernameAtom,
+  passwordAtom,
+  errorMessageAtom,
+  loadingAtom,
+} from "../utils/atoms";
 
 export default function Login() {
   // States
   const [username, setUsername] = useAtom(usernameAtom);
   const [password, setPassword] = useAtom(passwordAtom);
   const [errorMessage, setErrorMessage] = useAtom(errorMessageAtom);
+  const [_, setLoading] = useAtom(loadingAtom);
 
   // for redirecting user to login page
   const navigate = useNavigate();
@@ -49,6 +55,7 @@ export default function Login() {
       return;
     }
 
+    setLoading(true);
     // try to sign in
     try {
       const signInResponse = await signIn.create({
@@ -62,6 +69,7 @@ export default function Login() {
         setUsername("");
         setPassword("");
         setErrorMessage({});
+        setLoading(false);
         navigate("/");
       } else {
         setErrorMessage({ general: "Invalid username or password" });
@@ -69,6 +77,7 @@ export default function Login() {
     } catch (error) {
       setErrorMessage({ general: "Invalid username or password" });
     }
+    setLoading(false);
   };
 
   return (
@@ -104,12 +113,7 @@ export default function Login() {
               onChange={onInputChange}
             />
             <div>
-              <button
-                type="submit"
-                className={`w-full ${buttonStyles.button} ${buttonStyles.primary}`}
-              >
-                Login
-              </button>
+              <Button type="submit" title={"Login"} />
               <div className="text-md px-12 text-center mt-4 font-medium">
                 <Link
                   to="/forgot-password"
@@ -139,12 +143,7 @@ export default function Login() {
                   Get Started with ContentBlocks
                 </div>
                 <Link to="/signup">
-                  <button
-                    type="button"
-                    className={`w-full ${buttonStyles.button} ${buttonStyles.primary}`}
-                  >
-                    Create Your Account
-                  </button>
+                  <Button type="button" title={"Create Your Account"} />
                 </Link>
                 <div className="text-md text-center mt-4 text-gray-600">
                   Your first workspace is free!

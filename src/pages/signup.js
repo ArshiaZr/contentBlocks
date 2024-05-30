@@ -13,6 +13,7 @@ import {
   errorMessageAtom,
   confirmPasswordAtom,
   usernameAtom,
+  loadingAtom,
 } from "../utils/atoms";
 import { validatePassword, validateEmail } from "../utils/validations";
 
@@ -23,6 +24,7 @@ export default function SignUp() {
   const [password, setPassword] = useAtom(passwordAtom);
   const [confirmPassword, setConfirmPassword] = useAtom(confirmPasswordAtom);
   const [errorMessage, setErrorMessage] = useAtom(errorMessageAtom);
+  const [_, setLoading] = useAtom(loadingAtom);
 
   // for redirecting user to login page
   const navigate = useNavigate();
@@ -72,6 +74,7 @@ export default function SignUp() {
     setErrorMessage(errors);
     if (Object.keys(errors).length > 0) return;
 
+    setLoading(true);
     // create a new user account
     try {
       const signUpResponse = await signUp.create({
@@ -89,6 +92,7 @@ export default function SignUp() {
         setPassword("");
         setConfirmPassword("");
         setErrorMessage({});
+        setLoading(false);
 
         // redirect user to login page
         navigate("/");
@@ -98,6 +102,7 @@ export default function SignUp() {
     } catch (error) {
       setErrorMessage({ general: error?.errors[0]?.message });
     }
+    setLoading(false);
   };
 
   return (
