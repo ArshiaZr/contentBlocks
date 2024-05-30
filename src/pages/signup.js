@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAtom } from "jotai";
 import { useSignUp, useClerk } from "@clerk/clerk-react";
 
-import buttonStyles from "../styles/ui/button.module.scss";
+import Button from "../components/Button";
 
 import Input from "../components/Input";
 
@@ -162,12 +162,7 @@ export default function SignUp() {
               onChange={onInputChange}
             />
             <div>
-              <button
-                type="submit"
-                className={`w-full ${buttonStyles.button} ${buttonStyles.primary}`}
-              >
-                Sign Up
-              </button>
+              <Button type="submit" title={"Sign Up"} />
             </div>
             <div className="text-md px-12 text-center mt-4 font-medium">
               <svg

@@ -39,6 +39,14 @@ Below is a demonstration in action:
 
 ## Available Scripts
 
+First run install:
+
+### `npm install`
+
+Then create .env file and put your own Clerk key in it with following format:
+
+### `REACT_APP_CLERK_PUBLISHABLE_KEY=<YOUR-CODE>`
+
 In the project directory, you can run:
 
 ### `npm start`
