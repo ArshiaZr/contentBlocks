@@ -8,15 +8,20 @@ import Input from "../components/Input";
 import { usernameAtom, passwordAtom, errorMessageAtom } from "../utils/atoms";
 
 export default function Login() {
+  // States
   const [username, setUsername] = useAtom(usernameAtom);
   const [password, setPassword] = useAtom(passwordAtom);
   const [errorMessage, setErrorMessage] = useAtom(errorMessageAtom);
 
+  // for redirecting user to login page
   const navigate = useNavigate();
 
+  // Clerk's signIn hook
   const { signIn } = useSignIn();
+  // Clerk's setActive hook
   const { setActive } = useClerk();
 
+  // handle input change
   const onInputChange = ({ target: { name, value } }) => {
     const setters = {
       username: setUsername,

@@ -29,6 +29,7 @@ export default function SignUp() {
   // Clerk's signUp hook
   const { signUp } = useSignUp();
 
+  // handle input change
   const onInputChange = ({ target: { name, value } }) => {
     const setters = {
       username: setUsername,

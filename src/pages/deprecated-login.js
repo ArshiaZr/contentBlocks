@@ -8,9 +8,11 @@ import { emailAtom, errorMessageAtom } from "../utils/atoms";
 import { validateEmail } from "../utils/validations";
 
 export default function DeprecatedLogin() {
+  // States
   const [email, setEmail] = useAtom(emailAtom);
   const [errorMessage, setErrorMessage] = useAtom(errorMessageAtom);
 
+  // handle input change
   const onInputChange = ({ target: { name, value } }) => {
     const setters = {
       email: setEmail,
@@ -18,6 +20,7 @@ export default function DeprecatedLogin() {
     setters[name](value);
   };
 
+  // handle login form submission
   const handleLogin = async (e) => {
     // initialize temporary errors object
     let errors = {};

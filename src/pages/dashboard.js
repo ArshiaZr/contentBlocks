@@ -2,8 +2,10 @@ import React from "react";
 import { useClerk } from "@clerk/clerk-react";
 
 export default function Dashboard() {
+  // Clerk's signOut hook
   const { signOut } = useClerk();
 
+  // handle logout
   const handleLogout = async () => {
     await signOut();
   };

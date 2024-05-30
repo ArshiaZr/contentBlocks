@@ -13,6 +13,7 @@ export default function DeprecatedSignup() {
   const [email, setEmail] = useAtom(emailAtom);
   const [errorMessage, setErrorMessage] = useAtom(errorMessageAtom);
 
+  // handle input change
   const onInputChange = ({ target: { name, value } }) => {
     const setters = {
       email: setEmail,
