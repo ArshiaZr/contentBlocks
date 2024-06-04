@@ -50,7 +50,7 @@ const useForgotPassword = () => {
         setLoading(false);
         setPasswordPending(false);
         // Redirect to login page
-        navigate("/login");
+        navigate("/");
       }
     } catch (error) {
       setErrorMessage({ general: error?.errors[0]?.message });
