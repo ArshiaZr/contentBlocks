@@ -11,3 +11,5 @@ export const confirmPasswordAtom = atom("");
 export const isAuthenticatedAtom = atomWithStorage("isAuth", false);
 export const userAtom = atomWithStorage("user", {});
 export const loadingAtom = atom(false);
+export const verifyPendingAtom = atom(false);
+export const passwordResetPendingAtom = atom(false);

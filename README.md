@@ -45,7 +45,11 @@ First run install:
 
 Then create .env file and put your own Clerk key in it with following format:
 
-### `REACT_APP_CLERK_PUBLISHABLE_KEY=<YOUR-CODE>`
+### `REACT_APP_CLERK_PUBLISHABLE_KEY=<YOUR-KEY>`
+
+Here's a key you can use to test
+
+### `REACT_APP_CLERK_PUBLISHABLE_KEY="pk_test_cnVsaW5nLWZsYW1pbmdvLTQ2LmNsZXJrLmFjY291bnRzLmRldiQ"`
 
 In the project directory, you can run:
 
