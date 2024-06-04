@@ -14,7 +14,7 @@ const useForgotPassword = () => {
   const navigate = useNavigate();
 
   // Clerk hook for signing in
-  const { signIn } = useSignIn();
+  const { signIn, setActive } = useSignIn();
   const [email, setEmail] = useAtom(emailAtom);
   const [errorMessage, setErrorMessage] = useAtom(errorMessageAtom);
   const [loading, setLoading] = useAtom(loadingAtom);
@@ -47,6 +47,7 @@ const useForgotPassword = () => {
         password,
       });
       if (result.status === "complete") {
+        await setActive({ session: result.createdSessionId });
         setLoading(false);
         setPasswordPending(false);
         // Redirect to login page
